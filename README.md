@@ -10,7 +10,7 @@
 
 A one-line joke about working beside an AI coding agent, written to `/output/entry.txt` by `main.ts`.
 
-> My coding agent finished the feature in four minutes, and I've spent four hours reading its code just to pretend I reviewed it.
+> Cannot reproduce: it worked until the demo started.
 
 ## Run
 
