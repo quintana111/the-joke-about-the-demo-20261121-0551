@@ -5,5 +5,9 @@ import { mkdirSync, writeFileSync } from "node:fs";
 const JOKE =
   "My coding agent finished the feature in four minutes, and I've spent four hours reading its code just to pretend I reviewed it.";
 
+if (JOKE.includes("\n") || [...JOKE].length > 280) {
+  throw new Error("JOKE must be a single line of at most 280 characters");
+}
+
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", JOKE, "utf8");
