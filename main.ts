@@ -3,10 +3,15 @@ import { mkdirSync, writeFileSync } from "node:fs";
 // One-line joke about working beside an AI coding agent.
 // Written as a single line to the absolute path /output/entry.txt (UTF-8).
 const JOKE =
-  "My coding agent finished the feature in four minutes, and I've spent four hours reading its code just to pretend I reviewed it.";
+  "It worked on my machine, in staging, in rehearsal — just never once during the demo.";
 
-if (JOKE.includes("\n") || [...JOKE].length > 280) {
-  throw new Error("JOKE must be a single line of at most 280 characters");
+// Runtime guard: validate the joke before writing anything.
+const CODE_POINTS = [...JOKE].length;
+if (JOKE.length === 0 || JOKE.includes("\n") || JOKE.includes("\r")) {
+  throw new Error("JOKE must be exactly one line");
+}
+if (CODE_POINTS < 1 || CODE_POINTS > 280) {
+  throw new Error("JOKE must be 1-280 Unicode code points");
 }
 
 mkdirSync("/output", { recursive: true });
