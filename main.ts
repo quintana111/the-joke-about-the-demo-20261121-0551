@@ -1,18 +1,19 @@
+// Entry: a one-line joke about the demo that only breaks during the demo.
+// Writes the joke to /output/entry.txt with no trailing newline.
 import { mkdirSync, writeFileSync } from "node:fs";
 
-// One-line joke about working beside an AI coding agent.
-// Written as a single line to the absolute path /output/entry.txt (UTF-8).
-const JOKE =
-  "Cannot reproduce: it worked until the demo started.";
+const JOKE = "Cannot reproduce: it worked until the demo started.";
+const OUT = "/output/entry.txt";
 
-// Runtime guard: validate the joke before writing anything.
-const CODE_POINTS = [...JOKE].length;
-if (JOKE.length === 0 || JOKE.trim().length === 0 || JOKE.includes("\n") || JOKE.includes("\r")) {
-  throw new Error("JOKE must be exactly one non-blank line");
+if (JOKE.split("\n").length !== 1) {
+  throw new Error("joke must be exactly one line");
 }
-if (CODE_POINTS < 1 || CODE_POINTS > 280) {
-  throw new Error("JOKE must be 1-280 Unicode code points");
+if ([...JOKE].length < 1 || [...JOKE].length > 280) {
+  throw new Error("joke must be 1-280 code points");
+}
+if (JOKE.trim().length === 0) {
+  throw new Error("joke must not be empty");
 }
 
 mkdirSync("/output", { recursive: true });
-writeFileSync("/output/entry.txt", JOKE, "utf8");
+writeFileSync(OUT, JOKE, "utf8");
